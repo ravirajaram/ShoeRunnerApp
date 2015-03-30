@@ -1,4 +1,5 @@
 var rootURL = "http://localhost:8084/ShoeRunner/rest";
+
 var currentShoeRunnerRequest;
 
 $(document).ready(function () {
@@ -33,7 +34,7 @@ function createRequest(upc) {
 	console.log('createRequest');
 	$.ajax({
 		type: 'GET',
-		url: rootURL + '/login' + '/upc/' + upc,
+		url: rootURL + '/shoerunner' + '/returnall' + '/employee/' + '123' + '/upc/' + upc,
 		dataType: "json", // data type of response
 		success: renderListNew
 	});
@@ -54,7 +55,7 @@ function findAll() {
     console.log('findall: ');
     $.ajax({
         type: 'GET',
-        url: rootURL + '/login' + '/user/' + 'ravi' + '/role/' + 'shoerunner',
+        url: rootURL + '/shoerunner',
         dataType: "json",
         success: renderList
     });
@@ -64,7 +65,7 @@ function findById(id) {
     console.log('findById: ' + id);
     $.ajax({
         type: 'GET',
-        url: rootURL + '/login' + '/id/' + id,
+        url: rootURL + '/shoerunner' + '/id/' + id,
         dataType: "json",
         success: function (data) {
             console.log('findById success: ' + data.name);
@@ -103,9 +104,9 @@ function renderListNew(data) {
 
 function renderDetails(shoeRunnerRequest) {
     $('#id1').val(shoeRunnerRequest.id);
-    $('#upc').val(shoeRunnerRequest.upc);
-    $('#itemDescription').val(shoeRunnerRequest.itemDescription);
-    $('#itemColor').val(shoeRunnerRequest.itemColor);
+    $('#upc').val(shoeRunnerRequest.item.upc);
+    $('#itemDescription').val(shoeRunnerRequest.item.description);
+    $('#itemColor').val(shoeRunnerRequest.item.color);
     $('#requestStatus').val(shoeRunnerRequest.requestStatus);
-    $('#pic').attr('src', 'pics/' + shoeRunnerRequest.itemImageUrl);
+    $('#pic').attr('src', 'pics/' + shoeRunnerRequest.item.itemImageUrl);
 }
